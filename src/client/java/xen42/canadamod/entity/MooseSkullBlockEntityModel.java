@@ -24,38 +24,49 @@ public class MooseSkullBlockEntityModel extends SkullBlockEntityModel {
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
-		ModelPartData head = modelPartData.addChild("head", ModelPartBuilder.create(), ModelTransform.origin(0.0F, -10.0F, -15.0F));
-
-		ModelPartData oops_the_head_is_backwards = head.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(84, 24).cuboid(-1.0F, 0.0F, -7.0F, 2.0F, 4.0F, 6.0F, new Dilation(0.0F))
-		.uv(30, 109).cuboid(-5.0F, -7.924F, -9.8682F, 10.0F, 8.0F, 11.0F, new Dilation(0.0F))
-		.uv(36, 95).cuboid(-3.0F, -5.924F, 1.1318F, 6.0F, 5.0F, 7.0F, new Dilation(0.0F))
-		.uv(57, 46).cuboid(-4.0F, -9.924F, -4.8682F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F))
-		.uv(57, 46).cuboid(2.0F, -9.924F, -4.8682F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 5.0F, -10.0F, 0.0F, 3.1416F, 0.0F));
-
-		ModelPartData left_antler = oops_the_head_is_backwards.addChild("left_antler", ModelPartBuilder.create().uv(0, 13).cuboid(-8.0F, -7.0F, -4.0F, 8.0F, 2.0F, 2.0F, new Dilation(0.0F))
-		.uv(50, 19).cuboid(-8.0F, -10.0F, -5.0F, 6.0F, 4.0F, 2.0F, new Dilation(0.0F))
-		.uv(25, 30).cuboid(-9.0F, -11.0F, -5.0F, 1.0F, 5.0F, 2.0F, new Dilation(0.0F))
-		.uv(0, 28).cuboid(-3.0F, -14.0F, -5.0F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
-		.uv(14, 30).cuboid(-5.0F, -14.0F, -5.0F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
-		.uv(0, 9).cuboid(-7.0F, -13.0F, -5.0F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
-		.uv(0, 32).cuboid(-4.0F, -13.0F, -5.0F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
-		.uv(21, 14).cuboid(-6.0F, -12.0F, -5.0F, 1.0F, 2.0F, 2.0F, new Dilation(0.0F)), ModelTransform.origin(-5.0F, 0.0F, 1.0F));
-
-		ModelPartData right_antler = oops_the_head_is_backwards.addChild("right_antler", ModelPartBuilder.create().uv(0, 13).cuboid(-7.0F, -12.0F, -4.0F, 8.0F, 2.0F, 2.0F, new Dilation(0.0F))
-		.uv(50, 19).cuboid(-5.0F, -15.0F, -5.0F, 6.0F, 4.0F, 2.0F, new Dilation(0.0F))
-		.uv(0, 11).cuboid(1.0F, -16.0F, -5.0F, 1.0F, 5.0F, 2.0F, new Dilation(0.0F))
-		.uv(35, 15).cuboid(-3.0F, -19.0F, -5.0F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
-		.uv(49, 29).cuboid(-5.0F, -19.0F, -5.0F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
-		.uv(20, 22).cuboid(-1.0F, -18.0F, -5.0F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
-		.uv(40, 31).cuboid(-4.0F, -18.0F, -5.0F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
-		.uv(28, 23).cuboid(-2.0F, -17.0F, -5.0F, 1.0F, 2.0F, 2.0F, new Dilation(0.0F)), ModelTransform.origin(12.0F, 5.0F, 1.0F));
 		
-		return TexturedModelData.of(modelData, 192, 128);
+		ModelPartData head = modelPartData.addChild(
+			EntityModelPartNames.HEAD, 
+			ModelPartBuilder.create()
+				.uv(80, 54).mirrored().cuboid("dewlap", -1.0F, 0.0F, -1.0F, 2.0F, 4.0F, 6.0F, new Dilation(0.0F)).mirrored(false)
+				.uv(0, 45).mirrored().cuboid(EntityModelPartNames.HEAD, -5.0F, -8.0F, -3.0F, 10.0F, 8.0F, 11.0F, new Dilation(0.0F)).mirrored(false)
+				.uv(48, 52).mirrored().cuboid(EntityModelPartNames.MOUTH, -3.0F, -6.0F, -10.0F, 6.0F, 5.0F, 7.0F, new Dilation(0.0F)).mirrored(false)
+				.uv(90, 0).cuboid(EntityModelPartNames.LEFT_EAR, 2.0F, -10.0F, 2.0F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F))
+				.uv(90, 0).cuboid(EntityModelPartNames.RIGHT_EAR, -4.0F, -10.0F, 2.0F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)), 
+			ModelTransform.of(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+
+		ModelPartData left_antler = head.addChild(
+			"left_antler",
+			ModelPartBuilder.create()
+				.uv(0, 13).cuboid(-8.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new Dilation(0.0F))
+				.uv(50, 19).cuboid(-8.0F, -4.0F, 0.0F, 6.0F, 4.0F, 2.0F, new Dilation(0.0F))
+				.uv(25, 30).cuboid(-9.0F, -5.0F, 0.0F, 1.0F, 5.0F, 2.0F, new Dilation(0.0F))
+				.uv(0, 28).cuboid(-3.0F, -8.0F, 0.0F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
+				.uv(14, 30).cuboid(-5.0F, -8.0F, 0.0F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
+				.uv(0, 9).cuboid(-7.0F, -7.0F, 0.0F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
+				.uv(0, 32).cuboid(-4.0F, -7.0F, 0.0F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
+				.uv(21, 14).cuboid(-6.0F, -6.0F, 0.0F, 1.0F, 2.0F, 2.0F, new Dilation(0.0F)), 
+			ModelTransform.origin(-5.0F, -6.0F, 0.0F));
+
+		ModelPartData right_antler = head.addChild(
+			"right_antler", 
+			ModelPartBuilder.create()
+				.uv(0, 13).cuboid(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new Dilation(0.0F))
+				.uv(50, 19).cuboid(2.0F, -4.0F, 0.0F, 6.0F, 4.0F, 2.0F, new Dilation(0.0F))
+				.uv(0, 11).cuboid(8.0F, -5.0F, 0.0F, 1.0F, 5.0F, 2.0F, new Dilation(0.0F))
+				.uv(35, 15).cuboid(4.0F, -8.0F, 0.0F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
+				.uv(49, 29).cuboid(2.0F, -8.0F, 0.0F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
+				.uv(20, 22).cuboid(6.0F, -7.0F, 0.0F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
+				.uv(40, 31).cuboid(3.0F, -7.0F, 0.0F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
+				.uv(28, 23).cuboid(5.0F, -6.0F, 0.0F, 1.0F, 2.0F, 2.0F, new Dilation(0.0F)), 
+			ModelTransform.origin(5.0F, -6.0F, 0.0F));
+		
+		return TexturedModelData.of(modelData, 96, 64);
 	}
 
 	@Override
 	public void setHeadRotation(float animationProgress, float yaw, float pitch) {
-		this.head.yaw = yaw * (float) (Math.PI / 180.0);
-		this.head.pitch = pitch * (float) (Math.PI / 180.0);
+		this.head.yaw = yaw * ((float)Math.PI / 180.0F);
+		this.head.pitch = pitch * ((float)Math.PI / 180.0F);
 	}
 }

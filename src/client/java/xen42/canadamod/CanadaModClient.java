@@ -59,6 +59,7 @@ import xen42.canadamod.entity.GrizzlyEntityModel;
 import xen42.canadamod.entity.GrizzlyEntityRenderer;
 import xen42.canadamod.entity.MooseEntityModel;
 import xen42.canadamod.entity.MooseEntityRenderer;
+import xen42.canadamod.entity.MooseSkullBlockEntityModel;
 import xen42.canadamod.entity.MooseSkullBlockEntityRenderer;
 import xen42.canadamod.screen.CookingPotHandledScreen;
 
@@ -67,6 +68,7 @@ public class CanadaModClient implements ClientModInitializer {
 	public static final EntityModelLayer MAPLE_CHEST_BOAT = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "chest_boat/maple"), "main");
 	public static final EntityModelLayer MODEL_BEAVER_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "beaver"), "main");
 	public static final EntityModelLayer MODEL_MOOSE_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "moose"), "main");
+	public static final EntityModelLayer MODEL_MOOSE_SKULL_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "moose_skull"), "main");
 	public static final EntityModelLayer MODEL_DUCK_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "duck"), "main");
 	public static final EntityModelLayer MODEL_GOOSE_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "goose"), "main");
 	public static final EntityModelLayer MODEL_GRIZZLY_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "grizzly"), "main");
@@ -128,6 +130,7 @@ public class CanadaModClient implements ClientModInitializer {
 		ArmorRenderer.register(new BlockOnHeadArmorRenderer(CanadaBlocks.MOOSE_HEAD), CanadaItems.MOOSE_HEAD);
 
 		BlockEntityRendererFactories.register(CanadaMod.MOOSE_HEAD_ENTITY, MooseSkullBlockEntityRenderer::new);
+		EntityModelLayerRegistry.registerModelLayer(MODEL_MOOSE_SKULL_LAYER, MooseSkullBlockEntityModel::getTexturedModelData);
 
 		ClientPlayNetworking.registerGlobalReceiver(BeaverChopTreeEffectPayload.PAYLOAD_ID, (payload, context) -> {
 			context.client().execute(() -> {

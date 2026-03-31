@@ -45,6 +45,7 @@ public abstract class SkullBlockEntityRendererMixin
 	) {
 		if (type instanceof CanadaSkullType cType) {
 			SkullBlockEntityModel model = (SkullBlockEntityModel)(switch (cType) {
+				case MOOSE -> new MooseSkullBlockEntityModel(models.getModelPart(CanadaModClient.MODEL_MOOSE_SKULL_LAYER));
 				default -> throw new MatchException(null, null);
 			});
 			info.setReturnValue(model);
