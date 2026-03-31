@@ -1,7 +1,10 @@
 package xen42.canadamod.entities;
 
+import java.util.ArrayDeque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -36,6 +39,9 @@ public class BeaverChopTreeGoal extends Goal {
 
     private final int MAX_BREAKING_TICKS = 40;
     private int choppingTicks = 0;
+
+    // Prevent chewing through multiple touching trees
+    private static final int MAX_LOGS_TO_BREAK = 32;
 
     public BeaverChopTreeGoal(BeaverEntity beaver) {
         this.beaver = beaver;
@@ -227,17 +233,52 @@ public class BeaverChopTreeGoal extends Goal {
     }
 
     private void breakTree() {
-        var blockPos = this.beaver.getChoppingTreePos();
-        while (this.beaver.getWorld().getBlockState(blockPos).isIn(BlockTags.LOGS)) {
-            this.beaver.getWorld().breakBlock(blockPos, true);
-            blockPos = blockPos.up();
+        BlockPos startPos = this.beaver.getChoppingTreePos();
+        var world = this.beaver.getWorld();
+        Set<BlockPos> visited = new HashSet<>();
+        ArrayDeque<BlockPos> toCheck = new ArrayDeque<>();
+        ArrayDeque<BlockPos> logsToBreak = new ArrayDeque<>();
+
+        toCheck.add(startPos);
+
+        while (!toCheck.isEmpty() && logsToBreak.size() < MAX_LOGS_TO_BREAK) {
+            BlockPos pos = toCheck.removeFirst();
+
+            if (!visited.add(pos)) {
+                continue;
+            }
+
+            BlockState state = world.getBlockState(pos);
+            if (!state.isIn(BlockTags.LOGS)) {
+                continue;
+            }
+
+            logsToBreak.add(pos);
+
+            // Check all adjacent blocks
+            for (int dx = -1; dx <= 1; dx++) {
+                for (int dy = -1; dy <= 1; dy++) {
+                    for (int dz = -1; dz <= 1; dz++) {
+                        if (dx == 0 && dy == 0 && dz == 0) {
+                            continue;
+                        }
+
+                        toCheck.add(pos.add(dx, dy, dz));
+                    }
+                }
+            }
         }
+
+        while (!logsToBreak.isEmpty()) {
+            world.breakBlock(logsToBreak.removeFirst(), true);
+        }
+
         if (sapling != null) {
-            this.beaver.getWorld().setBlockState(this.beaver.getChoppingTreePos(), sapling.getDefaultState());
+            world.setBlockState(startPos, sapling.getDefaultState());
         }
+
         this.beaver.stopChopping();
         this.beaver.onChopTree();
         this.isChoppingTree = false;
     }
 }
- 

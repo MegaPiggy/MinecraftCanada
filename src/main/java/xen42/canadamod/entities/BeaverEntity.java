@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
+import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
@@ -53,7 +54,7 @@ import xen42.canadamod.CanadaMod;
 import xen42.canadamod.CanadaSounds;
 import xen42.canadamod.CanadaTags;
 
-public class BeaverEntity extends AnimalEntity {
+public class BeaverEntity extends AnimalEntity implements ConsumableComponent.ConsumableSoundProvider {
     private static final TrackedData<Integer> CHOP_FATIGUE = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> CHOP_FRENZY = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
@@ -240,12 +241,7 @@ public class BeaverEntity extends AnimalEntity {
             }
             else {
                 this.getWorld().addParticleClient(ParticleTypes.HAPPY_VILLAGER, this.getParticleX(1.0), this.getRandomBodyY() + 0.5, this.getParticleZ(1.0), 0.0, 0.0, 0.0);
-                if (itemStack.isOf(CanadaItems.MAPLE_SYRUP_BOTTLE)) {
-                    this.getWorld().playSoundFromEntityClient(this, SoundEvents.ITEM_HONEY_BOTTLE_DRINK.value(), SoundCategory.NEUTRAL, 1f, 1f);
-                }
-                else {
-                    this.getWorld().playSoundFromEntityClient(this, CanadaSounds.SOUND_BEAVER_EAT, SoundCategory.NEUTRAL, 1f, 1f);
-                }
+                this.getWorld().playSoundFromEntityClient(this, getConsumeSound(itemStack), SoundCategory.NEUTRAL, 1f, 1f);
                 return ActionResult.SUCCESS;
             }
         }
@@ -304,4 +300,9 @@ public class BeaverEntity extends AnimalEntity {
         this.getDataTracker().set(CHOP_FATIGUE, nbt.getInt("chopFatigue").orElse(0));
         this.getDataTracker().set(CHOP_FRENZY, nbt.getInt("chopFrenzy").orElse(0));
     }
+
+	@Override
+	public SoundEvent getConsumeSound(ItemStack stack) {
+		return stack.isOf(CanadaItems.MAPLE_SYRUP_BOTTLE) ? SoundEvents.ITEM_HONEY_BOTTLE_DRINK.value() : CanadaSounds.SOUND_BEAVER_EAT;
+	}
 }
