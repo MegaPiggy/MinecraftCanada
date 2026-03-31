@@ -25,7 +25,7 @@ public class MooseWallSkullBlock extends WallSkullBlock {
     }
 
     public MooseWallSkullBlock(Settings settings) {
-        super(null, settings);
+        super(CanadaSkullType.MOOSE, settings);
     }
     
     @Override

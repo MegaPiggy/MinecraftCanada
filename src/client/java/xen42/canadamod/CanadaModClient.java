@@ -25,6 +25,7 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.block.entity.HangingSignBlockEntityRenderer;
 import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
+import net.minecraft.client.render.block.entity.SkullBlockEntityRenderer;
 import net.minecraft.client.render.entity.BoatEntityRenderer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.BoatEntityModel;
@@ -42,6 +43,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import xen42.canadamod.armor.BeaverHatModel;
 import xen42.canadamod.armor.MooseHatModel;
+import xen42.canadamod.block.skull.CanadaSkullType;
 import xen42.canadamod.block.skull.MooseSkullBlock;
 import xen42.canadamod.entities.BeaverChopTreeEffectPayload;
 import xen42.canadamod.entities.BeaverChopTreeGoal;
@@ -118,6 +120,8 @@ public class CanadaModClient implements ClientModInitializer {
 
 		EntityRendererRegistry.register(CanadaMod.GRIZZLY_ENTITY, context -> new GrizzlyEntityRenderer(context));
 		EntityModelLayerRegistry.registerModelLayer(MODEL_GRIZZLY_LAYER, GrizzlyEntityModel::getTexturedModelData);
+		
+		SkullBlockEntityRenderer.TEXTURES.put(CanadaSkullType.MOOSE, MooseSkullBlockEntityRenderer.TEXTURE);
 
 		ArmorRenderer.register(new CustomArmorRenderer(BeaverHatModel::getModel), CanadaItems.BEAVER_HELMET);
 		ArmorRenderer.register(new CustomArmorRenderer(MooseHatModel::getModel), CanadaItems.MOOSE_HELMET);

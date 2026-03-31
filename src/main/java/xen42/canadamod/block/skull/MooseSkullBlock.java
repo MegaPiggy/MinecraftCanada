@@ -25,7 +25,7 @@ public class MooseSkullBlock extends SkullBlock {
     public static final BooleanProperty WEIRD_HACK = BooleanProperty.of("weird_hack");
 
     public MooseSkullBlock(Settings settings) {
-        super(null, settings);
+        super(CanadaSkullType.MOOSE, settings);
         this.setDefaultState(this.getDefaultState().with(WEIRD_HACK, true));
     }
 

@@ -6,7 +6,8 @@
 		"HangingSignEditScreenMixin",
 		"AbstractSignEditScreenMixin",
 		"TooltipComponentMixin",
-		"HandledScreenMixin"
+		"HandledScreenMixin",
+		"SkullBlockEntityRendererMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
